@@ -1,0 +1,119 @@
+composer require doctrine/dbal
+
+
+Migrations are like version control for your database, allowing your team to define and share the application's database schema definition. If you have ever had to tell a teammate to manually add a column to their local database schema after pulling in your changes from source control, you've faced the problem that database migrations solve.
+
+php artisan make:migration create_users_table
+php artisan make:migration create_flights_table
+
+php artisan make:migration add_newColumn_to_tableName_table --table=tableName
+
+
+A migration class contains two methods: UP and DOWN. The up method is used to add new tables, columns, or indexes to your database, while the down method should reverse the operations performed by the up method.
+
+
+php artisan migrate:rollback
+php artisan migrate:rollback --step=5
+
+php artisan migrate:reset
+
+php artisan migrate:refresh
+
+php artisan migrate:fresh
+
+creating table --
+To create a new database table, use the create method on the Schema facade. The create method accepts two arguments: the first is the name of the table, while the second is a closure which receives a Blueprint object that may be used to define the new table:
+
+ Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+		
+		
+
+Checking For Table / Column Existence
+
+if (Schema::hasTable('users')) {
+
+if (Schema::hasColumn('users', 'email')) {
+
+
+Schema::create('calculations', function (Blueprint $table) {
+    $table->temporary();
+ 
+    // ...
+});
+
+UPDATE
+Schema::table('users', function (Blueprint $table) {
+    $table->integer('votes');
+});
+
+RENAMING AND DROP
+Schema::rename($from, $to);
+
+Schema::drop('users');
+Schema::dropIfExists('users');
+
+CREATING COLUMNS
+Schema::table('users', function (Blueprint $table) {
+    $table->integer('votes');
+});
+
+
+DEFAULT EXPRESSIONS
+Schema::create('flights', function (Blueprint $table) {
+            $table->id();
+            $table->json('movies')->default(new Expression('(JSON_ARRAY())'));
+            $table->timestamps();
+        });
+		
+		
+Updating Column Attributes
+
+Schema::table('users', function (Blueprint $table) {
+    $table->string('name', 50)->change();
+});
+
+
+Creating Indexes
+
+Schema::table('users', function (Blueprint $table) {
+    $table->string('email')->unique();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

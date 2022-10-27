@@ -1,0 +1,60 @@
+There are two primary ways of working with session data in Laravel:
+
+	Via a request instance.
+	
+		$request->session()->put('key', 'value');
+		
+	Via the global helper.
+	
+		session(['key' => 'value']);
+		
+		
+Retrive particular session data
+		1) Via a Request instance
+
+			public function show(Request $request, $id)
+			{
+				$value = $request->session()->get('key');
+			}
+			//Specifying a default value...
+			$value = $request->session()->get('key', 'default');
+			$value = $request->session()->get('key', function () {
+				return 'default';
+			});
+		2) Via global session helper
+
+			$value = session('key');
+
+			// Specifying a default value...
+			$value = session('key', 'default');
+			
+			
+Retrieving All Session Data
+		$data = $request->session()->all();
+		
+Determining If An Item Exists In The Session
+		$request->session()->has('users')
+		// Return true if exist and value is not null
+
+		$request->session()->exists('users')
+		//  If value is null use exists() method. 
+		// Return true if key exists.value doesn't matter here 
+		
+Flash Data (temporary session)
+		store items in the session only for the next request.
+		$request->session()->flash('status', 'Update successful!');
+		
+Retrieving & Deleting An Item
+		$value = $request->session()->pull('key', 'default');
+		
+Deleting Data (removing session)
+		// Forget a single key...
+		$request->session()->forget('key');
+
+		// Forget multiple keys...
+		$request->session()->forget(['key1', 'key2']);
+
+		// remove all keys...
+		$request->session()->flush();
+		
+		

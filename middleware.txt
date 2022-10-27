@@ -1,0 +1,57 @@
+Middleware provide a convenient mechanism for inspecting and filtering HTTP requests entering your application. For example, Laravel includes a middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to your application's login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.
+
+To create a new middleware, use the make:middleware Artisan command:
+php artisan make:middleware EnsureTokenIsValid
+
+This command will place a new EnsureTokenIsValid class within your app/Http/Middleware directory. 
+
+
+We register(or consume) middleware in two ways. One is global and another is route specific.>
+
+For registering middleware for all http requests(global), put the middleware class name in $middleware property in app/Http/Kernel.php file
+
+ For registering middleware for specific route, put the middleware class name with keyname in $routeMiddleware and user middleware() method to apply on specific route.
+ 
+ 
+ After putting the middleware class name with keyname we can apply the middleware on route like
+		 Route::get('/about', function(){
+			return view('about');
+		})->middleware('auth');
+
+		Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+			return $request->user();
+		});
+
+We can use $middlewareGroups to group multiple middleware class in a single key. We can see laravel comes with default $middlewareGroups
+
+We can use web keyname in route like
+
+Route::get('/', function () {
+    //
+})->middleware('web');
+On the root(/) route all middleware classes applying which is written web array.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

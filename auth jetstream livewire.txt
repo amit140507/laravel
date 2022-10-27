@@ -1,0 +1,13 @@
+php composer.phar create-project laravel/laravel 
+
+composer require laravel/jetstream
+
+php artisan jetstream:install livewire
+composer require livewire/livewire
+
+
+npm install && npm run dev
+
+php artisan migrate
+
+php artisan serve

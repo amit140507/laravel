@@ -1,0 +1,14 @@
+Your own application, as well as all of Laravel's core services, are bootstrapped via service providers.
+
+THE REGISTER METHOD
+
+we mean registering things, including registering service container bindings, event listeners, middleware, and even routes. Service providers are the central place to configure your application.
+
+
+All service providers extend the Illuminate\Support\ServiceProvider class. Most service providers contain a register and a boot method. Within the register method, you should only bind things into the service container. You should never attempt to register any event listeners, routes, or any other piece of functionality within the register method.
+
+ a new provider - php artisan make:provider RiakServiceProvider
+ 
+BOOT METHOD
+
+So, what if we need to register a view composer within our service provider? This should be done within the boot method. This method is called after all other service providers have been registered, meaning you have access to all other services that have been registered by the framework:

@@ -1,0 +1,26 @@
+The entry point for all requests to a Laravel application is the public/index.php file. All requests are directed to this file by your web server (Apache / Nginx) configuration. it is a starting point for loading the rest of the framework.
+
+The index.php file loads the Composer generated autoloader definition, and then retrieves an instance of the Laravel application from bootstrap/app.php. The first action taken by Laravel itself is to create an instance of the application / service container.
+
+
+Next, the incoming request is sent to either the HTTP kernel or the console kernel, depending on the type of request that is entering the application. These two kernels serve as the central location that all requests flow through.HTTP kernel is located in app/Http/Kernel.php.
+
+The HTTP kernel extends the Illuminate\Foundation\Http\Kernel class
+
+The HTTP kernel also defines a list of HTTP middleware that all requests must pass through before being handled by the application
+. These middleware handle reading and writing the HTTP session, determining if the application is in maintenance mode, verifying the CSRF token, and more.
+
+One of the most important kernel bootstrapping actions is loading the service providers for your application.
+ Service providers are responsible for bootstrapping all of the framework's various components, such as the database, queue, validation, and routing components. All of the service providers for the application are configured in the config/app.php configuration file's providers array.
+ Essentially every major feature offered by Laravel is bootstrapped and configured by a service provider.
+ 
+ One of the most important service providers in your application is the App\Providers\RouteServiceProvider.
+ 
+ 
+ Once the application has been bootstrapped and all service providers have been registered, the Request will be handed off to the router for dispatching. The router will dispatch the request to a route or controller, as well as run any route specific middleware.
+ 
+ 
+ Once the route or controller method returns a response, the response will travel back outward through the route's middleware, giving the application a chance to modify or examine the outgoing response.
+ 
+ 
+ Finally, once the response travels back through the middleware, the HTTP kernel's handle method returns the response object and the index.php file calls the send method on the returned response. The send method sends the response content to the user's web browser. 
