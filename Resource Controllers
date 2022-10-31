@@ -1,0 +1,32 @@
+php  artisan make:controller PostController --resource
+
+Route::resource('photos', PostController::class);
+
+
+ADD IN CONTROLLER SHOW METHOD
+
+public function show($id)  
+{  
+return "show method is called and ID is : ". $id;  
+}  
+ADD IN CONTROLLER CREATE METHOD
+
+public function create()  
+{  
+     return "This is the create method";  
+}  
+
+
+Registering routes for multiple controllers
+Route::resources([
+    'photos' => PhotoController::class,
+    'posts' => PostController::class,
+]);
+
+Partial Resource Routes
+
+Route::resource('studentss', StudentController::class)->only([    'create', 'show']);
+
+Naming Resource Routes
+
+Route::resource('users', AdminUserController::class)->parameters(['users' => 'admin_user']);
