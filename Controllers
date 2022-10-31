@@ -1,0 +1,7 @@
+php artisan make:controller PhotoController --resource
+
+
+Routing Controllers
+
+
+Route::get('/userphoto', [PhotoController::class, 'index']);
