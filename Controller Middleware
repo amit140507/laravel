@@ -1,0 +1,21 @@
+php artisan make:middleware Check  
+
+ADD IN KERNEL.
+
+ 'check'=>\App\Http\Middleware\Check::class  
+ 
+ 
+ 
+ Route::get('profile', [PhotoController::class, 'create'])->middleware('check');
+ 
+ 
+ 
+  Route::get('profile/{id}', [PhotoController::class, 'show'])->middleware('check');
+  
+  
+  ADD TO TOP OF CONTROLLER
+  
+  $this->middleware(function ($request, $next) {  
+    // ...  
+  return $next($request);  
+});  
