@@ -1,0 +1,11 @@
+Route::get('/poster/{id}', [PhotoController::class, 'index']);
+
+ADD THIS IN INDEX
+
+public function index($id)  
+{  
+    return "ID is :". $id;  
+}  
+
+Controllers and Namespaces
+
