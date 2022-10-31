@@ -1,0 +1,44 @@
+Route::group( [ ] , callback);  
+
+
+Path Prefixes
+
+Route::group(['prefix' => 'tutorial'], function()  
+{  
+   Route::get('/first',function()  
+ {  
+   echo "first route";  
+ });  
+Route::get('/second',function()  
+ {  
+   echo "second route";  
+ });  
+Route::get('/third',function()  
+ {  
+   echo "third route";  
+ });  
+});  
+
+Middleware
+
+Route::middleware(['age'])->group( function()  
+{  
+  
+   Route::get('/aws',function()  
+ {  
+   echo "aws tutorial";  
+ });  
+Route::get('/jira',function()  
+ {  
+   echo "jira tutorial";  
+ });  
+Route::get('/testng',function()  
+ {  
+   echo "testng tutorial";  
+ });  
+  
+});  
+
+Route Name Prefixes
+
+
