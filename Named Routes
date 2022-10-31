@@ -1,0 +1,13 @@
+Route::get('student/details/example',array   
+('as'=>'student.details',function()  
+{  
+   $url=route('student.details');  
+   return "The url is : " .$url;  
+}));  
+
+
+ Route::get('user/{id}/profile',function($id)  
+{  
+   $url=route('profile',['id'=>100]);  
+    return $url;  
+})->name('profile');  
