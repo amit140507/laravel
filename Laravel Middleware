@@ -1,0 +1,52 @@
+Make a middleware
+
+php artisan make:middleware 'name of the middleware'.
+php artisan make:middleware EnsureTokenIsValid
+
+
+Apply middleware
+
+Middleware can be either applied to all the URLs or some particular URLs.
+kernel.php
+
+Check condition in middleware
+        to all --> \App\Http\Middleware\EnsureTokenIsValid::class,
+        
+        to specific routes  --->  'testmiddle' => \App\Http\Middleware\EnsureTokenIsValid::class,
+        
+        
+
+
+Route middleware
+
+Route::Get('/testmiddleware',function()  
+{  
+  return view('welcome');  
+})-> middleware('testmiddle');  
+
+
+Route::Get('/{age}',function($age)  
+{  
+  return view('welcome');  
+})-> middleware('testmiddle');  
+
+
+Check condition in middleware
+
+Route::Get('/{age}',function($age)  
+{  
+  return view('welcome');  
+})-> middleware('age');  
+
+add in middleware
+
+if($request->age>10)  
+{  
+echo "Age is greater than 10";  
+}  
+else  
+{  
+echo"Age is not greater than 10";  
+}  
+return $next($request);  
+
