@@ -29,4 +29,3 @@ Route::resource('studentss', StudentController::class)->only([    'create', 'sho
 
 Naming Resource Routes
 
-Route::resource('users', AdminUserController::class)->parameters(['users' => 'admin_user']);
