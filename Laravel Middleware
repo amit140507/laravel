@@ -33,14 +33,14 @@ Route::Get('/{age}',function($age)
 
 Check condition in middleware
 
-Route::Get('/{age}',function($age)  
+Route::Get('/{aged}',function($age)  
 {  
   return view('welcome');  
-})-> middleware('age');  
+})-> middleware('testmiddle');  
 
 add in middleware
 
-if($request->age>10)  
+if($request->aged>10)  
 {  
 echo "Age is greater than 10";  
 }  
